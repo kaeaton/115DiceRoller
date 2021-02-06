@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
             } else {
                 decreaseButton.visibility = View.GONE
             }
-            Toast.makeText(this, numSides.toString(), Toast.LENGTH_SHORT).show()
+            // Toast.makeText(this, numSides.toString(), Toast.LENGTH_SHORT).show()
         }
     }
 
