@@ -4,11 +4,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.Toast
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
-    private val NUM_SIDES = 6
+    private var numSides = 6
     private lateinit var diceImage: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,11 +20,19 @@ class MainActivity : AppCompatActivity() {
         rollButton.setOnClickListener {
             rollDice()
         }
+        decreaseButton.setOnClickListener {
+            decreaseDiceSize()
+        }
         diceImage = findViewById<ImageView>(R.id.dice_image)
     }
 
+    private fun decreaseDiceSize() {
+        if (numSides > 1) numSides--
+        Toast.makeText(this, numSides.toString(), Toast.LENGTH_SHORT).show()
+    }
+
     private fun rollDice() {
-        val randomInt = Random().nextInt(NUM_SIDES) + 1
+        val randomInt = Random().nextInt(numSides) + 1
         val drawableResource = when(randomInt) {
             1 -> R.drawable.dice_1
             2 -> R.drawable.dice_2
