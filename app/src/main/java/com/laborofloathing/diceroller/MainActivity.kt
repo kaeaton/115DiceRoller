@@ -2,24 +2,27 @@ package com.laborofloathing.diceroller
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.core.view.isVisible
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
     private var numSides = 6
     private lateinit var diceImage: ImageView
+    private lateinit var decreaseButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val rollButton: Button = findViewById(R.id.roll_button)
-        val decreaseButton: Button = findViewById(R.id.decrease_button)
         rollButton.setOnClickListener {
             rollDice()
         }
+        decreaseButton = findViewById(R.id.decrease_button)
         decreaseButton.setOnClickListener {
             decreaseDiceSize()
         }
@@ -27,8 +30,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun decreaseDiceSize() {
-        if (numSides > 1) numSides--
-        Toast.makeText(this, numSides.toString(), Toast.LENGTH_SHORT).show()
+        var text: String
+        if (numSides > 1) {
+            numSides--
+            if (numSides >= 2) {
+                text = getString(R.string.decreasing_button_text) + " " + (numSides - 1).toString()
+                decreaseButton.setText(text)
+            } else {
+                decreaseButton.visibility = View.GONE
+            }
+            Toast.makeText(this, numSides.toString(), Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun rollDice() {

@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Dice roller</string>
     <string name="roll_button_text">Let\'s Roll</string>
-    <string name="decrease_button_text">Decrease maximum value</string>
+    <string name="decrease_button_text">Decrease maximum value to 5</string>
     <string name="roll_text">1</string>
+    <string name="decreasing_button_text">Decrease maximum value to </string>
 </resources>
