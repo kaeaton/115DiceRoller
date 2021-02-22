@@ -3,5 +3,5 @@
     <string name="roll_button_text">Let\'s Roll</string>
     <string name="decrease_button_text">Decrease maximum value to 5</string>
     <string name="roll_text">1</string>
-    <string name="decreasing_button_text">Decrease maximum value to </string>
+    <string name="decreasing_button_text">Decrease maximum value to %1$d</string>
 </resources>

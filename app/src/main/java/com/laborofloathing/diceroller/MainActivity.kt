@@ -24,22 +24,16 @@ class MainActivity : AppCompatActivity() {
         }
         decreaseButton = findViewById(R.id.decrease_button)
         decreaseButton.setOnClickListener {
+            numSides--
             decreaseDiceSize()
         }
         diceImage = findViewById<ImageView>(R.id.dice_image)
     }
 
     private fun decreaseDiceSize() {
-        var text: String
-        if (numSides > 1) {
-            numSides--
-            if (numSides >= 2) {
-                text = getString(R.string.decreasing_button_text) + " " + (numSides - 1).toString()
-                decreaseButton.setText(text)
-            } else {
-                decreaseButton.visibility = View.GONE
-            }
-            // Toast.makeText(this, numSides.toString(), Toast.LENGTH_SHORT).show()
+        when(numSides) {
+            1 -> decreaseButton.visibility = View.GONE
+            else -> decreaseButton.text = getString(R.string.decreasing_button_text, (numSides - 1))
         }
     }
 
