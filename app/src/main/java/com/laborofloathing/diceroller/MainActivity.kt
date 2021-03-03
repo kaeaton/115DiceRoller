@@ -14,10 +14,16 @@ class MainActivity : AppCompatActivity() {
     private var numSides = 6
     private lateinit var diceImage: ImageView
     private lateinit var decreaseButton: Button
+    private val NUM_SIDES_KEY = "NumOfSides"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        if (savedInstanceState != null) {
+            numSides = savedInstanceState.getInt(NUM_SIDES_KEY)
+        }
+
         val rollButton: Button = findViewById(R.id.roll_button)
         rollButton.setOnClickListener {
             rollDice()
@@ -30,8 +36,13 @@ class MainActivity : AppCompatActivity() {
         diceImage = findViewById<ImageView>(R.id.dice_image)
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt(NUM_SIDES_KEY, numSides)
+    }
+
     private fun decreaseDiceSize() {
-        when(numSides) {
+        when (numSides) {
             1 -> decreaseButton.visibility = View.GONE
             else -> decreaseButton.text = getString(R.string.decreasing_button_text, (numSides - 1))
         }
@@ -39,7 +50,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun rollDice() {
         val randomInt = Random().nextInt(numSides) + 1
-        val drawableResource = when(randomInt) {
+        val drawableResource = when (randomInt) {
             1 -> R.drawable.dice_1
             2 -> R.drawable.dice_2
             3 -> R.drawable.dice_3
