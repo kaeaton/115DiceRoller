@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
 
         if (savedInstanceState != null) {
             numSides = savedInstanceState.getInt(NUM_SIDES_KEY)
+            Timber.i("numSides read from the bundle")
         }
 
         val rollButton: Button = findViewById(R.id.roll_button)
@@ -44,6 +45,7 @@ class MainActivity : AppCompatActivity() {
         Timber.i("onSaveInstanceState called")
 
         outState.putInt(NUM_SIDES_KEY, numSides)
+        Timber.i("numSides written to bundle")
     }
 
     private fun decreaseDiceSize() {
