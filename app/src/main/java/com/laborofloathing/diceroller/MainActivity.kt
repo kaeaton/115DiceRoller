@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.view.isVisible
+import timber.log.Timber
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -19,6 +20,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        Timber.i("onCreate called")
 
         if (savedInstanceState != null) {
             numSides = savedInstanceState.getInt(NUM_SIDES_KEY)
@@ -38,6 +40,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
+
+        Timber.i("onSaveInstanceState called")
+
         outState.putInt(NUM_SIDES_KEY, numSides)
     }
 
