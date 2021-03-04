@@ -13,17 +13,22 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
 
     private var numSides = 6
+    private var sideShowing = 1
     private lateinit var diceImage: ImageView
     private lateinit var decreaseButton: Button
     private val NUM_SIDES_KEY = "NumOfSides"
+    private val SIDE_SHOWING = "SideShowing"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         Timber.i("onCreate called")
 
+        diceImage = findViewById<ImageView>(R.id.dice_image)
+
         if (savedInstanceState != null) {
             numSides = savedInstanceState.getInt(NUM_SIDES_KEY)
+            setDiceImage(savedInstanceState.getInt(SIDE_SHOWING))
             Timber.i("numSides read from the bundle")
         }
 
@@ -36,7 +41,6 @@ class MainActivity : AppCompatActivity() {
             numSides--
             decreaseDiceSize()
         }
-        diceImage = findViewById<ImageView>(R.id.dice_image)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -45,6 +49,7 @@ class MainActivity : AppCompatActivity() {
         Timber.i("onSaveInstanceState called")
 
         outState.putInt(NUM_SIDES_KEY, numSides)
+        outState.putInt(SIDE_SHOWING, sideShowing)
         Timber.i("numSides written to bundle")
     }
 
@@ -56,8 +61,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun rollDice() {
-        val randomInt = Random().nextInt(numSides) + 1
-        val drawableResource = when (randomInt) {
+        sideShowing = Random().nextInt(numSides) + 1
+        setDiceImage(sideShowing)
+    }
+
+    private fun setDiceImage(sideShowing: Int) {
+        val drawableResource = when (sideShowing) {
             1 -> R.drawable.dice_1
             2 -> R.drawable.dice_2
             3 -> R.drawable.dice_3
